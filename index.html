@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annotate - Lista de Afazeres</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+        <header>
+            <div class="controls">
+                <div class="theme-switcher" aria-label="Switch theme">
+                    <button id="theme-dark" class="theme-btn" title="Dark" aria-label="Dark"></button>
+                    <button id="theme-light" class="theme-btn" title="Light" aria-label="Light"></button>
+                    <button id="theme-vintage" class="theme-btn" title="Vintage" aria-label="Vintage"></button>
+                    <button id="theme-neon" class="theme-btn" title="Neon" aria-label="Neon"></button>
+                </div>
+            </div>
+            <h1 class="title">Annotate</h1>
+            <p class="subtitle">Sua lista de afazeres</p>
+        </header>
+        
+        <div class="todo-form">
+            <input type="text" id="todo-input" placeholder="Adicione uma nova tarefa..." class="todo-input">
+            <button id="add-todo" class="add-button">+</button>
+        </div>
+        
+        <div class="todo-list" id="todo-list">
+            <!-- Tarefas serão adicionadas aqui dinamicamente -->
+        </div>
+    </div>
+
+    <!-- Modal para notas -->
+    <div id="notes-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Notas</h3>
+            <textarea id="notes-text" class="notes-textarea" placeholder="Adicione suas notas aqui..."></textarea>
+            <button id="save-notes" class="save-notes">Salvar</button>
+        </div>
+    </div>
+    
+    <!-- Rodapé com troca de idioma -->
+    <footer class="footer">
+        <div class="lang-switcher" aria-label="Switch language">
+            <button id="lang-pt" class="lang-btn" title="Português" aria-label="Português">🇧🇷</button>
+            <button id="lang-en" class="lang-btn" title="English" aria-label="English">🇺🇸</button>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

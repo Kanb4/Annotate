@@ -1,0 +1,461 @@
+.theme-switcher {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.theme-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 1.2rem;
+    line-height: 1;
+    font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Apple Color Emoji', 'Noto Color Emoji', system-ui, -apple-system, 'Spectral', serif;
+}
+
+.theme-btn:hover {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,0.12);
+}
+
+/* Gradientes de pré-visualização nos botões de tema */
+#theme-dark { background-image: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+#theme-light { background-image: linear-gradient(135deg, #f7f8fc 0%, #e9ecf7 100%); }
+#theme-vintage { background-image: linear-gradient(135deg, #3e2f23 0%, #5b4636 100%); }
+#theme-neon { background-image: linear-gradient(135deg, #050511 0%, #220044 100%); }
+
+/* Rodapé */
+.footer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estado ativo (idioma/tema) - opcional para realce */
+.lang-btn.active, .theme-btn.active {
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.35);
+}
+
+/* Temas via data-attribute */
+body[data-theme="dark"] {
+    --primary-bg: rgba(18, 18, 18, 0.8);
+    --secondary-bg: rgba(30, 30, 30, 0.6);
+    --accent-color: #6c63ff;
+    --text-color: #e0e0e0;
+    --text-muted: #9e9e9e;
+    --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    --particle-rgb: 190,205,255;
+    --line-rgb: 80,200,255;
+}
+
+body[data-theme="light"] {
+    --primary-bg: rgba(255, 255, 255, 0.8);
+    --secondary-bg: rgba(255, 255, 255, 0.6);
+    --accent-color: #3f51b5;
+    --text-color: #1d1d1f;
+    --text-muted: #5f5f5f;
+    --bg-gradient: linear-gradient(135deg, #f7f8fc 0%, #e9ecf7 100%);
+    --particle-rgb: 40,60,120;
+    --line-rgb: 40,120,200;
+}
+
+body[data-theme="vintage"] {
+    --primary-bg: rgba(60, 45, 30, 0.8);
+    --secondary-bg: rgba(80, 60, 40, 0.6);
+    --accent-color: #d4a373;
+    --text-color: #f3e9dc;
+    --text-muted: #c7b8a1;
+    --bg-gradient: linear-gradient(135deg, #3e2f23 0%, #5b4636 100%);
+    --particle-rgb: 244,223,186;
+    --line-rgb: 212,163,115;
+}
+
+body[data-theme="neon"] {
+    --primary-bg: rgba(10, 10, 20, 0.85);
+    --secondary-bg: rgba(20, 20, 40, 0.65);
+    --accent-color: #00e5ff;
+    --text-color: #e0f7fa;
+    --text-muted: #9be7ff;
+    --bg-gradient: linear-gradient(135deg, #050511 0%, #220044 100%);
+    --particle-rgb: 0,229,255;
+    --line-rgb: 0,229,255;
+}
+/* Importando a fonte TGKurtain */
+@font-face {
+    font-family: 'TGKurtain';
+    src: url('fonts/TGKurtain/TGkurtainDEMO-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --primary-bg: rgba(18, 18, 18, 0.8);
+    --secondary-bg: rgba(30, 30, 30, 0.6);
+    --accent-color: #6c63ff;
+    --text-color: #e0e0e0;
+    --text-muted: #9e9e9e;
+    --success-color: #4caf50;
+    --border-radius: 12px;
+    --spacing: 1rem;
+    --blur: 16px;
+    --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Spectral', serif;
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    min-height: 100vh;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Fundo de partículas em tela cheia */
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #particles-canvas {
+        opacity: 0.35;
+    }
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.lang-switcher {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.lang-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 1.25rem;
+    line-height: 1;
+    font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Apple Color Emoji', 'Noto Color Emoji', system-ui, -apple-system, 'Spectral', serif;
+}
+
+.lang-btn:hover {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,0.12);
+}
+
+.title {
+    font-family: 'TGKurtain', cursive;
+    font-size: 4rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #cfe3ff, #6c63ff, #a0e0ff, #cfe3ff);
+    background-size: 300% 300%;
+    animation: titleGradient 12s ease-in-out infinite;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+@keyframes titleGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* Estilo do formulário */
+.todo-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.todo-input {
+    flex: 1;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(var(--blur));
+    color: var(--text-color);
+    font-family: 'Spectral', serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.todo-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent-color);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.add-button {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    width: 3rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+}
+
+/* Estilo da lista de tarefas */
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.todo-item {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px) saturate(120%);
+    -webkit-backdrop-filter: blur(18px) saturate(120%);
+    border-radius: var(--border-radius);
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.todo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.todo-text {
+    flex: 1;
+    margin: 0 1rem;
+    word-break: break-word;
+    font-weight: 700;
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.todo-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-button {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.06);
+    color: var(--text-muted);
+    cursor: pointer;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.action-button:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--text-color);
+    transform: translateY(-1px);
+}
+
+.check-button {
+    color: var(--success-color);
+}
+
+.check-button svg {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.check-button.completed {
+    color: var(--success-color);
+}
+
+.notes-button {
+    color: var(--accent-color);
+}
+
+.delete-button {
+    color: #ff5252;
+}
+
+/* Notas visíveis abaixo do texto */
+.todo-notes {
+    display: block;
+    margin: 0.35rem 1rem 0.2rem 1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    width: 100%;
+}
+
+/* Modal de notas */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--primary-bg);
+    backdrop-filter: blur(var(--blur));
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.close:hover {
+    color: var(--text-color);
+}
+
+.notes-textarea {
+    width: 100%;
+    height: 150px;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    font-family: 'Spectral', serif;
+    resize: none;
+}
+
+.save-notes {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    font-family: 'Spectral', serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.save-notes:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .title {
+        font-size: 3rem;
+    }
+    
+    .todo-form {
+        flex-direction: column;
+    }
+    
+    .add-button {
+        width: 100%;
+        padding: 0.8rem;
+    }
+}
